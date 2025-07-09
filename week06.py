@@ -1,7 +1,7 @@
 
 def load_to_list(filepath: str)-> list[float]:
     #first step check if there is data inslide the file path
-    temp_list = None
+    temp_list = "The data soure is empty"
     if filepath is not None and len(filepath) > 0:
         #next open the file using the open function and setting it to the reading mode
         with open("data/temperatures.txt", "r") as file:
@@ -52,7 +52,27 @@ def apply_markup(filepath:str)-> None:
                         applied_outcome.append(word)
                         # prints out the list but uses the need 'space' for each word that the strip() funciton did in the begining and uses .join to make the whole thing a single string
                 print(' '.join(applied_outcome))
+    else:
+        print("The data source was empty")
 
+
+
+
+"""Looking into the solutions and comparing my code I see a few differences. I think the most notable is the difference between
+ the 1st answer of the intersection. I think I got the first part of if foo == bar then it means there is an intersection.  
+ However I did not set up a way to scan the string 1 letter at a time to return a very accurate response. For the only alphabet
+   problem I believe mine is correct it is similar to the solution however it has some switched around values in the boolean 
+   side that still lead to a correct answer. For the letters only I think I got correct as it is almost the same as the solutions.
+     The only difference in this being the null checker. Mine assumes that it is letter only, however if it does not it returns 
+     as None. The palindrome maker is very promising. It works well however it uses a little bit different logic than the 
+     solutions. This is because it starts at the string at the end position and creates a reversed version of the string 
+     and adds it to the first string to create the palindrome. After going through testing I think my Palindrome checker 
+     is correct and uses very similar logic to the solutions. A few differences to mine is that it returns it as false if 
+     there are any other symbols or numbers. It also makes the string all lower case to avoid mixing up with letters. 
+     It also has two checkers both start at different ends and move to the middle checking every character and reporting 
+     back to make sure they are equal. I think I did very well this week of homework and truly believe I was correct with
+       most of my answers. I think going forward I need to include more comments and that is something I tried to do well in
+         week 6,"""
 
 #--------------------------------------------------------------------------------#
 # ⬆︎⬆︎⬆︎⬆︎⬆︎⬆︎⬆︎⬆︎⬆︎⬆︎⬆︎⬆︎⬆︎  WRITE YOUR CODE ABOVE THIS  LINE ⬆︎⬆︎⬆︎⬆︎⬆︎⬆︎⬆︎⬆︎⬆︎⬆︎⬆︎⬆︎⬆︎⬆︎
@@ -60,9 +80,19 @@ def apply_markup(filepath:str)-> None:
 # ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓  DO NOT MODIFY THE CODE BELOW THIS LINE ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 #--------------------------------------------------------------------------------#
 # 
+print(load_to_list("data/teperatures.txt"))
+print(load_to_list(None))
 
-print(load_to_list("data/temperatures.txt"))
-# list must be loaded into a list for the temps to be used as floats because if not the funciton will not be able to do caculations as it being a string
+
+
+
 temp_list = load_to_list("data/temperatures.txt")
 descriptive_statistics(temp_list)
+descriptive_statistics(None)
+
+
+
 apply_markup("data/markup.txt")
+apply_markup(None)
+
+
