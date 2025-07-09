@@ -9,7 +9,7 @@ def load_to_list(filepath: str)-> list[float]:
             temp_list = [float(line.strip())for line in file]
     # returns values weather it is empty or not
     return temp_list
-# print(load_to_list("data/temperatures.txt"))
+
 
 def descriptive_statistics(source_data: list[float])-> None:
     #checks if data is empty or not
@@ -24,44 +24,34 @@ def descriptive_statistics(source_data: list[float])-> None:
         #prints that the data was empty if it was
         print("Data source set was Empty")
 
-# temp_list = load_to_list("data/temperatures.txt")
-# descriptive_statistics(temp_list)
 
 def apply_markup(filepath:str)-> None:
+    # first step make sure the data is not empty
     if filepath is not None and len(filepath) > 0:
+        # next open the filepath and access it through the read mode
         with open(filepath ,"r") as file:
+            # declair the function to go through each line of the file
             for line in file:
-                appiled_outcome = []
-                i = 0
-                while i < len(line):
-                    if line[i] == ".":
-                        i += 1
-                        if i < len(line):
-                            appiled_outcome.append(line[i].upper())
-                    elif line[i] == "_":
-                        i += 1
-                        if i < len(line):
-                            appiled_outcome.append(' '.join(line[i]))
+                # for lines in the file remove uneeded spaces around the words and space the words so they can be acccesed in a list
+                words = line.strip().split()
+                # create a holding list for the applied words to be stored in
+                applied_outcome = []
+                # go into detail of the words in the file
+                for word in words:
+                    # uses the startswith function to determine which words should be tapered with
+                    if word.startswith('.'):
+                        # anylises the word by going to the 1st value in the string to skip the 0 value which would be either '.' or '_' then uppercases the remaining values in the string using the upper() funciton then adds them to the next applied_outcome list with the append function
+                        applied_outcome.append(word[1:].upper())
+                        # uses startswith to determine which strings in the words list has '_' first
+                    elif word.startswith('_'):
+                        # uses the join funtion to make a 'space' for every char in the string and starts at position 1 to skip the 0 position which would be '_' then appends them to the applied_outcome list uses the .join to make the outcome a single string
+                        applied_outcome.append(' '.join(word[1:]))
+                        # everything else that does not start with the special cases
                     else:
-                        appiled_outcome.append(line[i])
-                    i += 1
-                print(''.join(appiled_outcome),end = '')
-apply_markup("data/markup.txt")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                        # addeds to the applied_outcome with the append function
+                        applied_outcome.append(word)
+                        # prints out the list but uses the need 'space' for each word that the strip() funciton did in the begining and uses .join to make the whole thing a single string
+                print(' '.join(applied_outcome))
 
 
 #--------------------------------------------------------------------------------#
@@ -71,3 +61,8 @@ apply_markup("data/markup.txt")
 #--------------------------------------------------------------------------------#
 # 
 
+print(load_to_list("data/temperatures.txt"))
+# list must be loaded into a list for the temps to be used as floats because if not the funciton will not be able to do caculations as it being a string
+temp_list = load_to_list("data/temperatures.txt")
+descriptive_statistics(temp_list)
+apply_markup("data/markup.txt")
